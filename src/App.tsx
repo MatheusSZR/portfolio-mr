@@ -193,9 +193,10 @@ export default function App() {
       {/* SEÇÃO EXPERIÊNCIA COM SCROLL REVEAL SUAVE */}
       <section id="experiencia" className="py-24 px-8 md:px-24 border-t border-[#1A1A1E] bg-[#070709]">
         <div className="max-w-5xl mx-auto">
-          <span className="font-mono text-xs text-[#666666] tracking-widest uppercase block mb-12">
-            // TRAJETÓRIA PROFISSIONAL
-          </span>
+          <div className="mb-12">
+            <span className="font-mono text-xs text-[#888888] tracking-widest uppercase block mb-3">// TRAJETÓRIA PROFISSIONAL</span>
+            <h2 className="font-display text-3xl font-bold text-[#EDEDED]">Experiência profissional</h2>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
@@ -244,9 +245,10 @@ export default function App() {
       {/* SEÇÃO PROJETOS COM HOVER MULTI-ESTADO COORDENADO */}
       <section id="projetos" className="py-24 px-8 md:px-24 border-t border-[#1A1A1E]">
         <div className="max-w-5xl mx-auto">
-          <span className="font-mono text-xs text-[#666666] tracking-widest uppercase block mb-12">
-            // PRODUTOS & APLICAÇÕES
-          </span>
+          <div className="mb-12">
+            <span className="font-mono text-xs text-[#888888] tracking-widest uppercase block mb-3">// PRODUTOS & APLICAÇÕES</span>
+            <h2 className="font-display text-3xl font-bold text-[#EDEDED]">Projetos em destaque</h2>
+          </div>
 
           <div className="flex flex-col gap-8">
             {projetos.map((proj) => (
@@ -259,8 +261,9 @@ export default function App() {
       </main>
 
       {/* RODAPÉ */}
-      <footer className="py-12 px-8 md:px-24 border-t border-[#1A1A1E] bg-[#0A0A0C] flex flex-col sm:flex-row justify-between items-center font-mono text-xs text-[#666666] gap-4">
-        <span>MATHEUS RODRIGUES // 2026</span>
+      <footer className="py-12 px-8 md:px-24 border-t border-[#1A1A1E] bg-[#0A0A0C] flex flex-col sm:flex-row justify-between items-center font-mono text-xs text-[#888888] gap-4">
+        <span>MATHEUS RODRIGUES // {new Date().getFullYear()}</span>
+        <a href="https://github.com/MatheusSZR" target="_blank" rel="noopener noreferrer" className="text-[#10B981] hover:underline focus-visible:underline">GITHUB ↗</a>
         <span>BRASÍLIA, DF — BRASIL</span>
       </footer>
 
