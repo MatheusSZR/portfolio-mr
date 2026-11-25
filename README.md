@@ -1,32 +1,52 @@
-# React + TypeScript + Vite
+# Portfólio — Matheus Rodrigues
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Portfólio pessoal desenvolvido para apresentar minha trajetória em Qualidade de Software (QA), desenvolvimento de aplicações e análise de dados.
 
-Currently, two official plugins are available:
+## Tecnologias
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- Framer Motion
 
-## React Compiler
+## Executar localmente
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Pré-requisitos: Node.js compatível com a versão do Vite utilizada no projeto e npm.
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+O Vite exibirá no terminal o endereço local para abrir no navegador.
+
+## Verificações
+
+```bash
+npm run lint
+npm run build
+```
+
+- `npm run lint`: verifica problemas de código com Oxlint.
+- `npm run build`: executa a verificação de tipos do TypeScript e gera a versão de produção.
+
+## Estrutura principal
+
+```text
+src/
+  assets/       # Imagens utilizadas no portfólio
+  App.tsx       # Interface e conteúdo principal
+  App.css       # Estilos adicionais (quando necessários)
+  index.css     # Estilos globais e Tailwind
+  main.tsx      # Ponto de entrada React
+index.html      # Metadados e documento HTML
+```
+
+## Conteúdo
+
+As informações profissionais, competências e projetos exibidos devem ser mantidos atualizados e revisados antes de cada publicação.
+
+---
+
+Desenvolvido por Matheus Rodrigues.
