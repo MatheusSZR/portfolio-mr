@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
+import { motion, AnimatePresence, MotionConfig, useScroll, useSpring } from 'framer-motion';
 import avatarImg from './assets/avatar.png';
 import tedeumImg from './assets/tedeum.png';
 import bmCookiesImg from './assets/bm-cookies.png';
@@ -74,8 +74,10 @@ const skillsData: SkillNode[] = [
 export default function App() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
+    <MotionConfig reducedMotion="user">
     <div className="min-h-screen bg-[#050507] text-[#EDEDED] font-sans selection:bg-[#333333] relative">
       
       {/* Barra de progresso sutil no topo */}
@@ -83,23 +85,35 @@ export default function App() {
       <div className="noise-bg" />
 
       {/* NAVBAR PADRÃO (Cursor Normal) */}
-      <header className="fixed top-0 left-0 w-full h-20 bg-[#050507]/80 backdrop-blur-md border-b border-[#1A1A1E] z-50 flex items-center justify-between px-8 md:px-24">
+      <header className="fixed top-0 left-0 w-full min-h-20 bg-[#050507]/95 md:bg-[#050507]/80 backdrop-blur-md border-b border-[#1A1A1E] z-50 flex items-center justify-between px-5 sm:px-8 md:px-24">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 border border-[#333333] bg-[#0A0A0C] flex items-center justify-center font-mono text-xs font-bold">
             M<span className="text-[#10B981]">/</span>R
           </div>
           <span className="font-mono text-xs text-[#888888] hidden sm:inline">MATHEUS RODRIGUES // QA & DEV</span>
         </div>
-        <nav className="flex items-center gap-6 font-mono text-xs text-[#888888]">
-          <a href="#experiencia" className="hover:text-[#EDEDED] transition-colors">[_trajetória]</a>
-          <a href="#dados" className="hover:text-[#EDEDED] transition-colors">[_capacidades]</a>
-          <a href="#projetos" className="hover:text-[#EDEDED] transition-colors">[_projetos]</a>
-          <a href="https://github.com/MatheusSZR" target="_blank" rel="noopener noreferrer" className="text-[#10B981] hover:underline">
-            [GITHUB ↗]
-          </a>
+        <nav aria-label="Navegação principal" className="hidden md:flex items-center gap-6 font-mono text-xs text-[#888888]">
+          <a href="#experiencia" className="hover:text-[#EDEDED] focus-visible:text-[#EDEDED] transition-colors">[_trajetória]</a>
+          <a href="#dados" className="hover:text-[#EDEDED] focus-visible:text-[#EDEDED] transition-colors">[_capacidades]</a>
+          <a href="#projetos" className="hover:text-[#EDEDED] focus-visible:text-[#EDEDED] transition-colors">[_projetos]</a>
+          <a href="https://github.com/MatheusSZR" target="_blank" rel="noopener noreferrer" className="text-[#10B981] hover:underline focus-visible:underline">[GITHUB ↗]</a>
         </nav>
+        <button type="button" className="md:hidden border border-[#333338] px-3 py-2 font-mono text-xs text-[#EDEDED] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#10B981]" aria-expanded={isMenuOpen} aria-controls="mobile-navigation" aria-label={isMenuOpen ? 'Fechar menu' : 'Abrir menu'} onClick={() => setIsMenuOpen(open => !open)}>
+          {isMenuOpen ? '[ FECHAR ]' : '[ MENU ]'}
+        </button>
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.nav id="mobile-navigation" aria-label="Navegação móvel" initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.18 }} className="absolute top-full left-0 right-0 flex flex-col gap-5 border-b border-[#1A1A1E] bg-[#08080A] px-6 py-6 font-mono text-sm text-[#A0A0A0] md:hidden">
+              <a href="#experiencia" onClick={() => setIsMenuOpen(false)} className="hover:text-white focus-visible:text-white">[_trajetória]</a>
+              <a href="#dados" onClick={() => setIsMenuOpen(false)} className="hover:text-white focus-visible:text-white">[_capacidades]</a>
+              <a href="#projetos" onClick={() => setIsMenuOpen(false)} className="hover:text-white focus-visible:text-white">[_projetos]</a>
+              <a href="https://github.com/MatheusSZR" target="_blank" rel="noopener noreferrer" className="text-[#10B981]">[GITHUB ↗]</a>
+            </motion.nav>
+          )}
+        </AnimatePresence>
       </header>
 
+      <main>
       {/* HERO CINEMATOGRÁFICO */}
       <section className="min-h-screen pt-40 pb-20 px-8 md:px-24 max-w-7xl mx-auto flex flex-col justify-center">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -130,7 +144,7 @@ export default function App() {
               transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
               className="font-sans text-base md:text-lg text-[#888888] font-light leading-relaxed mb-8"
             >
-              Estudante de Ciência da Computação na Universidade Católica de Brasília e estagiário de QA na Engesoftware. Unindo a rigorosa validação de sistemas corporativos à engenharia de software e análise analítica.
+              Estudante de Ciência da Computação na Universidade Católica de Brasília e estagiário de QA na Engesoftware. Unindo a validação de sistemas corporativos à engenharia de software e à análise de dados.
             </motion.p>
             
             <motion.div 
@@ -167,7 +181,7 @@ export default function App() {
                 <span className="text-[#EDEDED]">ID: M-RODRIGUES</span>
                 <span className="text-[#10B981] flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
-                  OPERANDO
+                  PORTFÓLIO
                 </span>
               </div>
             </div>
@@ -179,9 +193,10 @@ export default function App() {
       {/* SEÇÃO EXPERIÊNCIA COM SCROLL REVEAL SUAVE */}
       <section id="experiencia" className="py-24 px-8 md:px-24 border-t border-[#1A1A1E] bg-[#070709]">
         <div className="max-w-5xl mx-auto">
-          <span className="font-mono text-xs text-[#666666] tracking-widest uppercase block mb-12">
-            // TRAJETÓRIA PROFISSIONAL
-          </span>
+          <div className="mb-12">
+            <span className="font-mono text-xs text-[#888888] tracking-widest uppercase block mb-3">// TRAJETÓRIA PROFISSIONAL</span>
+            <h2 className="font-display text-3xl font-bold text-[#EDEDED]">Experiência profissional</h2>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
@@ -230,9 +245,10 @@ export default function App() {
       {/* SEÇÃO PROJETOS COM HOVER MULTI-ESTADO COORDENADO */}
       <section id="projetos" className="py-24 px-8 md:px-24 border-t border-[#1A1A1E]">
         <div className="max-w-5xl mx-auto">
-          <span className="font-mono text-xs text-[#666666] tracking-widest uppercase block mb-12">
-            // PRODUTOS & APLICAÇÕES
-          </span>
+          <div className="mb-12">
+            <span className="font-mono text-xs text-[#888888] tracking-widest uppercase block mb-3">// PRODUTOS & APLICAÇÕES</span>
+            <h2 className="font-display text-3xl font-bold text-[#EDEDED]">Projetos em destaque</h2>
+          </div>
 
           <div className="flex flex-col gap-8">
             {projetos.map((proj) => (
@@ -242,13 +258,17 @@ export default function App() {
         </div>
       </section>
 
+      </main>
+
       {/* RODAPÉ */}
-      <footer className="py-12 px-8 md:px-24 border-t border-[#1A1A1E] bg-[#0A0A0C] flex flex-col sm:flex-row justify-between items-center font-mono text-xs text-[#666666] gap-4">
-        <span>MATHEUS RODRIGUES // 2026</span>
+      <footer className="py-12 px-8 md:px-24 border-t border-[#1A1A1E] bg-[#0A0A0C] flex flex-col sm:flex-row justify-between items-center font-mono text-xs text-[#888888] gap-4">
+        <span>MATHEUS RODRIGUES // {new Date().getFullYear()}</span>
+        <a href="https://github.com/MatheusSZR" target="_blank" rel="noopener noreferrer" className="text-[#10B981] hover:underline focus-visible:underline">GITHUB ↗</a>
         <span>BRASÍLIA, DF — BRASIL</span>
       </footer>
 
     </div>
+    </MotionConfig>
   );
 }
 
@@ -273,11 +293,13 @@ function DataFilterTabs() {
         ].map((tab) => (
           <button
             key={tab.id}
-            onClick={() => setActiveFilter(tab.id as any)}
+            type="button"
+            aria-pressed={activeFilter === tab.id}
+            onClick={() => setActiveFilter(tab.id as 'ALL' | 'QA' | 'DEV' | 'DATA')}
             className={`px-4 py-2 border transition-all relative ${
               activeFilter === tab.id 
                 ? 'border-[#EDEDED] text-[#EDEDED] bg-[#111115]' 
-                : 'border-[#1A1A1E] text-[#666666] hover:text-[#888888]'
+                : 'border-[#1A1A1E] text-[#888888] hover:text-[#EDEDED]'
             }`}
           >
             {tab.label}
@@ -308,7 +330,7 @@ function DataFilterTabs() {
                   <span className="font-mono text-[9px] text-[#10B981] border border-[#10B981]/20 bg-[#10B981]/5 px-2 py-0.5">
                     {skill.categoryLabel}
                   </span>
-                  <span className="font-mono text-[10px] text-[#555555]">
+                  <span className="font-mono text-[10px] text-[#888888]">
                     {skill.metric}
                   </span>
                 </div>
@@ -331,30 +353,20 @@ function DataFilterTabs() {
 // COMPONENTE: PROJETO COM HOVER MULTI-ESTADO ORQUESTRADO
 // ----------------------------------------------------
 function ProjectCard({ proj }: { proj: Project }) {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
     <motion.div 
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      animate={{ 
-        borderColor: isHovered ? '#333333' : '#1A1A1E',
-        backgroundColor: isHovered ? '#0C0C0F' : '#0A0A0C' 
-      }}
-      transition={{ duration: 0.3 }}
-      className="border bg-[#0A0A0C] grid grid-cols-1 md:grid-cols-12 overflow-hidden relative cursor-default"
+      className="group border border-[#1A1A1E] bg-[#0A0A0C] grid grid-cols-1 md:grid-cols-12 overflow-hidden relative transition-colors duration-300 hover:border-[#333333] hover:bg-[#0C0C0F]"
     >
       <div className="md:col-span-5 h-[240px] md:h-auto overflow-hidden bg-[#111113] border-r border-[#1A1A1E] relative">
         <motion.img 
           src={proj.img} 
           alt={proj.title} 
-          animate={{ scale: isHovered ? 1.05 : 1 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full h-full object-cover object-top opacity-70 filter grayscale group-hover:grayscale-0"
+          loading="lazy"
+          decoding="async"
+          className="w-full h-full object-cover object-top opacity-80 filter grayscale-0 transition-all duration-500 group-hover:scale-105 md:grayscale md:group-hover:grayscale-0"
         />
         <motion.div 
-          animate={{ opacity: isHovered ? 0 : 0.4 }}
-          className="absolute inset-0 bg-[#050507] pointer-events-none transition-opacity"
+          className="absolute inset-0 bg-[#050507] opacity-15 pointer-events-none transition-opacity duration-300 group-hover:opacity-0"
         />
       </div>
 
@@ -366,9 +378,7 @@ function ProjectCard({ proj }: { proj: Project }) {
           </div>
 
           <motion.h3 
-            animate={{ x: isHovered ? 6 : 0 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-2xl font-bold text-[#EDEDED] mb-3"
+            className="font-display text-2xl font-bold text-[#EDEDED] mb-3 transition-transform duration-300 group-hover:translate-x-1"
           >
             {proj.title}
           </motion.h3>
@@ -378,9 +388,6 @@ function ProjectCard({ proj }: { proj: Project }) {
           </p>
 
           <motion.div 
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: isHovered ? 1 : 0.6, y: isHovered ? 0 : 4 }}
-            transition={{ duration: 0.3 }}
             className="flex flex-wrap gap-1.5 mb-6"
           >
             {proj.stack.map(tech => (
@@ -398,8 +405,7 @@ function ProjectCard({ proj }: { proj: Project }) {
             href={proj.live} 
             target="_blank" 
             rel="noopener noreferrer"
-            animate={{ x: isHovered ? 0 : -4, opacity: isHovered ? 1 : 0.8 }}
-            className="text-[#10B981] hover:underline transition-all flex items-center gap-1"
+            className="text-[#10B981] hover:underline focus-visible:underline transition-all flex items-center gap-1"
           >
             <span>[ Acessar Sistema ]</span>
             <span>↗</span>
