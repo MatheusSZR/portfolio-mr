@@ -144,7 +144,7 @@ export default function App() {
               transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
               className="font-sans text-base md:text-lg text-[#888888] font-light leading-relaxed mb-8"
             >
-              Estudante de Ciência da Computação na Universidade Católica de Brasília e estagiário de QA na Engesoftware. Unindo a rigorosa validação de sistemas corporativos à engenharia de software e análise analítica.
+              Estudante de Ciência da Computação na Universidade Católica de Brasília e estagiário de QA na Engesoftware. Unindo a validação de sistemas corporativos à engenharia de software e à análise de dados.
             </motion.p>
             
             <motion.div 
@@ -181,7 +181,7 @@ export default function App() {
                 <span className="text-[#EDEDED]">ID: M-RODRIGUES</span>
                 <span className="text-[#10B981] flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
-                  OPERANDO
+                  PORTFÓLIO
                 </span>
               </div>
             </div>
@@ -299,7 +299,7 @@ function DataFilterTabs() {
             className={`px-4 py-2 border transition-all relative ${
               activeFilter === tab.id 
                 ? 'border-[#EDEDED] text-[#EDEDED] bg-[#111115]' 
-                : 'border-[#1A1A1E] text-[#666666] hover:text-[#888888]'
+                : 'border-[#1A1A1E] text-[#888888] hover:text-[#EDEDED]'
             }`}
           >
             {tab.label}
@@ -330,7 +330,7 @@ function DataFilterTabs() {
                   <span className="font-mono text-[9px] text-[#10B981] border border-[#10B981]/20 bg-[#10B981]/5 px-2 py-0.5">
                     {skill.categoryLabel}
                   </span>
-                  <span className="font-mono text-[10px] text-[#555555]">
+                  <span className="font-mono text-[10px] text-[#888888]">
                     {skill.metric}
                   </span>
                 </div>
